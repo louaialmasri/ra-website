@@ -3,18 +3,16 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 
 export function Navbar() {
   const pathname = usePathname();
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    // Wenn wir auf der Startseite sind, scrollen wir sanft.
     if (pathname === "/") {
       e.preventDefault();
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     }
-    // Auf anderen Seiten überlassen wir dem Link die Navigation.
-    // Next.js navigiert zur Startseite und springt zum richtigen Abschnitt.
   };
 
   return (
@@ -27,13 +25,28 @@ export function Navbar() {
             <p className="text-base font-semibold">Mehr Raum. Mehr Ordnung.</p>
           </div>
         </Link>
+
+        {/* --- HIER IST DIE LOGIK --- */}
         <div className="hidden items-center gap-2 md:flex">
-          <Link href="/#leistungen" onClick={(e) => handleScroll(e, "leistungen")} className="rounded-full px-3 py-2 text-sm text-slate-600 hover:text-slate-900">Leistungen</Link>
-          <Link href="/#referenzen" onClick={(e) => handleScroll(e, "referenzen")} className="rounded-full px-3 py-2 text-sm text-slate-600 hover:text-slate-900">Referenzen</Link>
-          <Link href="/#kontakt" onClick={(e) => handleScroll(e, "kontakt")} className="rounded-full px-3 py-2 text-sm text-slate-600 hover:text-slate-900">Kontakt</Link>
-          <Button asChild className="ml-2 rounded-full">
-            <Link href="/#kontakt" onClick={(e) => handleScroll(e, "kontakt")}>Kostenlos anfragen</Link>
-          </Button>
+          {pathname === "/" ? (
+            // Nur auf der Startseite anzeigen:
+            <>
+              <Link href="/#leistungen" onClick={(e) => handleScroll(e, "leistungen")} className="rounded-full px-3 py-2 text-sm text-slate-600 hover:text-slate-900">Leistungen</Link>
+              <Link href="/#referenzen" onClick={(e) => handleScroll(e, "referenzen")} className="rounded-full px-3 py-2 text-sm text-slate-600 hover:text-slate-900">Referenzen</Link>
+              <Link href="/#kontakt" onClick={(e) => handleScroll(e, "kontakt")} className="rounded-full px-3 py-2 text-sm text-slate-600 hover:text-slate-900">Kontakt</Link>
+              <Button asChild className="ml-2 rounded-full">
+                <Link href="/#kontakt" onClick={(e) => handleScroll(e, "kontakt")}>Kostenlos anfragen</Link>
+              </Button>
+            </>
+          ) : (
+            // Auf allen anderen Seiten anzeigen:
+            <Button asChild variant="ghost">
+              <Link href="/">
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Zurück zur Übersicht
+              </Link>
+            </Button>
+          )}
         </div>
       </div>
     </nav>

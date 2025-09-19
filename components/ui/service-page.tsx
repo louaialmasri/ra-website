@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollToContactButton } from "./scroll-to-contact-button";
-import { Breadcrumbs } from "./breadcrumbs";
 
 interface ServicePageProps {
   title: string;
@@ -30,26 +29,27 @@ export function ServicePage({
 
   return (
     <>
-      {/* Hero Section */}
+      {/* Hero Section - NEUES DESIGN */}
       <header className="relative h-[40vh] min-h-[300px] bg-slate-900">
         <img src={imageUrl} alt={title} className="absolute inset-0 h-full w-full object-cover opacity-30" />
-        <div className="relative mx-auto flex h-full max-w-6xl items-center px-6">
+        <div className="relative mx-auto flex h-full max-w-6xl items-end px-6 pb-12">
           <div className="max-w-3xl text-white">
-            <h1 className="text-4xl md:text-6xl font-semibold leading-[1.05] tracking-tight">{title}</h1>
+            <p className="text-sm font-semibold uppercase tracking-widest text-sky-300">Dienstleistung</p>
+            <h1 className="mt-1 text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">{title}</h1>
             <p className="mt-4 text-lg text-white/85">{description}</p>
           </div>
         </div>
       </header>
 
       <div className="mx-auto max-w-6xl px-6 py-16">
-        <Breadcrumbs items={breadcrumbs} />
-
+        {/* Breadcrumbs wurden hier entfernt */}
+        
         {/* Services Section */}
         <section>
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">Unsere Leistungen im Detail</h2>
+          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Unsere Leistungen im Detail</h2>
           <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => (
-              <Card key={service.title} className="border-slate-200 bg-white shadow-sm p-0">
+              <Card key={service.title} className="border-slate-200 bg-white p-0 shadow-sm">
                 <CardContent className="p-6">
                   <h3 className="text-xl font-semibold">{service.title}</h3>
                   <p className="mt-2 text-slate-600">{service.description}</p>
