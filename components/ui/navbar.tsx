@@ -3,30 +3,31 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
 
 export function Navbar() {
   const pathname = usePathname();
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    // Wenn wir bereits auf der Startseite sind, scrollen wir sanft.
     if (pathname === "/") {
       e.preventDefault();
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     }
+    // Ansonsten überlassen wir dem Link die Navigation zur Startseite.
   };
 
   return (
     <nav className="sticky top-0 z-40 border-b border-slate-200 bg-white/70 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
         <Link href="/" className="flex items-center gap-3">
-          <div className="grid h-9 w-9 place-items-center rounded-xl bg-sky-500 font-extrabold text-white">R&A</div>
+          <div className="grid h-9 w-9 place-items-center rounded-xl bg-sky-500 font-extrabold text-white">
+            R&A
+          </div>
           <div className="leading-tight">
             <p className="text-xs uppercase tracking-wide text-slate-500">Reinigung & Abbruch</p>
             <p className="text-base font-semibold">Mehr Raum. Mehr Ordnung.</p>
           </div>
         </Link>
-
-        {/* --- HIER IST DIE LOGIK --- */}
         <div className="hidden items-center gap-2 md:flex">
           {pathname === "/" ? (
             // Nur auf der Startseite anzeigen:
@@ -39,12 +40,9 @@ export function Navbar() {
               </Button>
             </>
           ) : (
-            // Auf allen anderen Seiten anzeigen:
-            <Button asChild variant="ghost">
-              <Link href="/">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Zurück zur Übersicht
-              </Link>
+            // Auf allen anderen Seiten den "Home"-Button anzeigen:
+            <Button asChild className="rounded-full">
+              <Link href="/">Home</Link>
             </Button>
           )}
         </div>

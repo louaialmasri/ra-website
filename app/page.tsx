@@ -12,7 +12,6 @@ import { Navbar } from "@/components/ui/navbar";
 export default function RALandingAlt() {
   return (
     <div className="min-h-screen bg-white text-slate-900">
-      <Navbar />
       <Hero />
 
       {/* Leistungen – 2er Raster */}
